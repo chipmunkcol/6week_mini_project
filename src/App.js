@@ -7,6 +7,7 @@ import Login from './Pages/Login/Login';
 import Signup from './Pages/Login/Signup';
 import Product from './Pages/Main/Product';
 import Banner from './Component/Banner';
+import Detail from './Pages/Main/Detail';
 
 
 

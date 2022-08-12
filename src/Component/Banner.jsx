@@ -5,7 +5,7 @@ import { useNavigate, Routes, Route } from 'react-router-dom'
 function Banner() {
 
     const navigate = useNavigate();
-    
+
 
     return(
         <Navbar bg="light" variant="light">
