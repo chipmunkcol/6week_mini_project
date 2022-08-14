@@ -1,7 +1,7 @@
 import { RESP } from "../../response";
 import styled from "styled-components";
 import { Container, Col, Row, } from "react-bootstrap";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useState, useEffect, } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
@@ -28,7 +28,7 @@ function Main(){
     const dispatch = useDispatch();
 
     const { isLoading , error , products } = useSelector((state)=> state.products)
-    console.log(isLoading, error, products)
+    // console.log(isLoading, error, products)
     
 
     useEffect(()=>{
@@ -36,7 +36,7 @@ function Main(){
         dispatch(__getProducts())
     },[])
     
-
+    const navigate = useNavigate()
 
     if (isLoading) {
         return <h1 style={{backgroundColor:'yellow'}}>로딩중입니다...</h1>
@@ -48,13 +48,14 @@ function Main(){
 
     return(
         <div>
-            <h1>메인페이지 입니다!</h1>
-
             <Container>
+
+                <TitleImg/>
+
                 <Row md={3}>
                 {
                     products.map((val)=>
-                        <Col key={val.id}>
+                        <Col key={val.id} style={{textAlign:'center'}} onClick={()=>{ navigate('/detail/'+val.id) }}>
                                 <Img productImg={val.imgUrl}></Img>
                                 <div>{val.title}</div>
                                 <div>{val.size}</div>
@@ -70,14 +71,26 @@ function Main(){
 }
 
 const Img = styled.div`
-    background-image: url(${props => props.productImg});
+    /* background-image: url(${props => props.productImg}); */
+    background-image: url('https://image.croket.co.kr/storeItem/61d2938ef6c636f401e1116a/itemImg/1657076753277/0/item_Yq8Ko.jpeg');
     background-position: center;
     background-size: cover;
+    background-color: aqua;
     width: 200px;
     height: 200px;
-
-    cursor:pointer
+    margin: 0 auto 0 auto;
+    cursor:pointer;
 `
+
+const TitleImg = styled.div`
+    background-image: url('https://p4.wallpaperbetter.com/wallpaper/511/624/9/nike-logo-just-do-it-simple-background-wallpaper-preview.jpg');
+    background-position: center;
+    background-size: cover;
+    width: 90%;
+    height: 300px;
+    margin: 4% auto 4% auto;
+`
+
 
 
 export default Main;

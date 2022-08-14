@@ -1,6 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
-
+import axios from 'axios';
+import { TextField, Button } from "@mui/material";
+import SendIcon from '@mui/icons-material/Send';
 
 
 function Product() {
@@ -12,19 +14,38 @@ function Product() {
     
     return(
         <div>
-            <h1>상품등록페이지 입니다!</h1>
-            <Container>
-                <div style={{width:'100%', height:'400px', backgroundColor:'gray'}}>
-                    <input type='file'/>
+
+            
+            <Container style={{margin:'4% 0 0 0'}}>
+                <div style={{width:'30%', marginTop:'7%'}}> 🎈nickname이 <br/>
+                                             들어옵니다 
                 </div>
+
                 <div style={{width:'100%'}}>
-                    <div>제품명: <input onChange={(e)=>{setTitle(e.target.value)}}/></div>
-                    <div>사이즈: <input onChange={(e)=>{setSize(e.target.value)}}/></div>
-                    <div>가격: <input onChange={(e)=>{setPrice(e.target.value)}}/></div>
-                    <div>설명: <input onChange={(e)=>{setContent(e.target.value)}}/></div>
-                    <button onClick={()=>{
+                    <h1 style={{ display:'flex'}}>래플 상품 등록</h1>
+                    
+                    <div style={{width:'100%', height:'400px', backgroundColor:'gray', marginTop:'16px'}}>
                         
-                    }}>저장하기</button>
+                        
+                        
+                        <input type='file'/>
+                    
+                    </div>
+                </div>
+                
+                <div style={{width:'100%', marginTop:'60px'}}>
+                    
+                    <div><TextField style={{width:'60%', margin:'0 0 20px 0'}} id="standard-basic" label="제품명" variant="standard" onChange={(e)=>{setTitle(e.target.value);}}/></div>
+                    <div><TextField style={{width:'60%', margin:'0 0 20px 0'}} id="standard-basic" label="사이즈" variant="standard" onChange={(e)=>{setTitle(e.target.value);}}/></div>
+                    <div><TextField style={{width:'60%', margin:'0 0 20px 0'}} id="standard-basic" label="가격" variant="standard" onChange={(e)=>{setTitle(e.target.value);}}/></div>
+                    <div><TextField style={{width:'60%', margin:'0 0 30px 0'}} id="standard-multiline-static" label="제품설명" multiline rows={4} variant="standard" onChange={(e)=>{setContent(e.target.value)}}/></div>
+                    
+                    <Button variant="contained" endIcon={<SendIcon />} onClick={()=>{
+                        axios.post('', {title: title, size: size, price: price, content: content})
+                    }}>
+                    저장하기
+                    </Button>
+
                 </div>
             </Container>
 
