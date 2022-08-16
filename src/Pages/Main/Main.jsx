@@ -10,21 +10,6 @@ import { __getProducts } from "../../store";
 
 function Main(){
 
-    // const [pdata, setPdata] = useState([])
-
-    // const resp = RESP.products.result
-
-    // const products = () => {
-    //     axios.get('https://codingapple1.github.io/shop/data2.json')
-    //     .then((data)=>{
-    //         setPdata(data.data)
-    //         console.log(data.data)
-    //     })
-    //     .catch((error)=>{
-    //         console.log('error:'+error)
-    //     })
-    // }
-
     const dispatch = useDispatch();
 
     const { isLoading , error , products } = useSelector((state)=> state.products)
