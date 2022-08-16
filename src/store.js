@@ -2,35 +2,33 @@ import { configureStore, createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from 'axios';
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // 상품 관련 Axios!
 
 export const __getProducts = createAsyncThunk(
     'getProducts',
     async (payload, thunkAPI) => {
         try {
-        const data = await axios.get('https://codingapple1.github.io/shop/data2.json')
+            const data = await axios.get('http://localhost:3001/products')
             return thunkAPI.fulfillWithValue(data.data);
         } catch (error) {
             return thunkAPI.rejectWithValue(error);
         }
     }
 );
+
+
+export const __postProducts = createAsyncThunk(
+    'postProducts',
+    async (payload, thunkAPI) => {
+        try {
+            const data = axios.post("http://localhost:3001/products", payload)
+            return thunkAPI.fulfillWithValue(data.data)
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error)
+        }
+    }
+)
+
 
 export const productsSlice = createSlice({
     name: 'products',
@@ -57,9 +55,65 @@ export const productsSlice = createSlice({
 
 
 
+
+// 댓글 관련 Axios!!
+
+export const __getComment = createAsyncThunk(
+    'comment/getComment',
+    async (payload, thunkAPI) => {
+        try {
+            const data = await axios.get('http://localhost:3001/comments')
+            return thunkAPI.fulfillWithValue(data.data)
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error)
+        }
+    }
+)
+
+export const __postComment = createAsyncThunk(
+    'comment/postComment',
+    async (payload, thunkAPI) => {
+        try {
+            const data = await axios.post('http://localhost:3001/comments', payload)
+            return thunkAPI.fulfillWithValue(data.data)
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error)
+        }
+    }
+)
+
+
+
+export const commentSlice = createSlice({
+    name: 'comments',
+    initialState:{
+        comments: [],
+        isLoading2: false,
+        error2: null,
+    },
+    reducers: {},
+    extraReducers: {
+        [__getComment.pending]: (state) => {
+            state.isLoading2 = true;
+        },
+        [__getComment.fulfilled]: (state, action) => {
+            state.isLoading2 = false;
+            state.comments = action.payload;
+        },
+        [__getComment.rejected]: (state, action) => {
+            state.isLoading2 = false;
+            state.error = action.payload;
+        }
+    }
+})
+
+
+
+
 export default configureStore({
     reducer: {
         products: productsSlice.reducer,
+        comments: commentSlice.reducer,
 
     }
 })

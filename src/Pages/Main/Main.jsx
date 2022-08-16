@@ -1,10 +1,10 @@
-import { RESP } from "../../response";
+// import { RESP } from "../../response";
 import styled from "styled-components";
 import { Container, Col, Row, } from "react-bootstrap";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useState, useEffect, } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
+// import axios from "axios";
 import { __getProducts } from "../../store";
 
 
@@ -34,7 +34,7 @@ function Main(){
     useEffect(()=>{
         // products()
         dispatch(__getProducts())
-    },[])
+    },[dispatch])
     
     const navigate = useNavigate()
 
@@ -56,7 +56,7 @@ function Main(){
                 {
                     products.map((val)=>
                         <Col key={val.id} style={{textAlign:'center'}} onClick={()=>{ navigate('/detail/'+val.id) }}>
-                                <Img productImg={val.imgUrl}></Img>
+                                <Img productImg={val.image}></Img>
                                 <div>{val.title}</div>
                                 <div>{val.size}</div>
                                 <div>❤ +{val.likes}</div>
@@ -71,8 +71,7 @@ function Main(){
 }
 
 const Img = styled.div`
-    /* background-image: url(${props => props.productImg}); */
-    background-image: url('https://image.croket.co.kr/storeItem/61d2938ef6c636f401e1116a/itemImg/1657076753277/0/item_Yq8Ko.jpeg');
+    background-image: url(${props => props.productImg});
     background-position: center;
     background-size: cover;
     background-color: aqua;
