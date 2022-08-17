@@ -16,6 +16,8 @@ export const __postComment = createAsyncThunk(
     'comment/postComment',
     async (payload, thunkAPI) => {
         try {
+            console.log(payload[1])
+            console.log(payload[0])
             const data = await axios.post(`http://54.180.122.99/api/comments/${payload[1]}`, payload[0])
             return thunkAPI.fulfillWithValue(data.data)
         } catch (error) {

@@ -108,7 +108,7 @@ useEffect(()=>{
                         
                         <Button variant="outline-secondary" id="button-addon2" onClick={()=>{
                             if (comment !== '') {
-                                dispatch(__postComment([{comment: comment},{productId: params}]))
+                                // dispatch(__postComment([{comment: comment},{productId: params}]))
                                 setTimeout(() => {
                                     setReLoading(!reLoading)
                                 }, 500);

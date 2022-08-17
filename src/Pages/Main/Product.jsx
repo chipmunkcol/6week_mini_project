@@ -10,13 +10,17 @@ import axios from 'axios';
 import { useDispatch } from "react-redux";
 import { __postProduct } from '../../redux/modules/product';
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { ref, uploadBytes } from 'firebase/storage'
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from '../../shared/firebase'
+import { initializeApp } from "firebase/app";
+import { getStorage } from "firebase/storage";
 
 
 
 const Product = () => {
 
   const [urlFile, setUrlFile] = useState('')
+  const [fileUrl, setFileUrl] = useState('')
 
   const [title, setTitle] = useState()
   const [size, setSize] = useState()
@@ -26,18 +30,31 @@ const Product = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const handleChangeFile = (e) => {
+  // const handleChangeFile = (e) => {
 
-      let reader = new FileReader();
+  //     let reader = new FileReader();
 
-      if (e.target.files[0]) {
-          reader.readAsDataURL(e.target.files[0])
-      }
-      reader.onload = () => {
-          const fileUrl = reader.result;
-          setUrlFile(fileUrl)
-      }
-  }
+  //     if (e.target.files[0]) {
+  //         reader.readAsDataURL(e.target.files[0])
+  //     }
+  //     reader.onload = () => {
+  //         const fileUrl = reader.result;
+  //         setUrlFile(fileUrl)
+  //     }
+  // }
+
+  const uploadFB = async (e) => {
+    console.log(e.target.files)
+    const uploaded_file = await uploadBytes(
+      ref(storage, `images/${e.target.files[0].name}`),
+      e.target.files[0]
+    );
+    console.log(uploaded_file)
+  
+    const file_url = await getDownloadURL(uploaded_file.ref)
+  
+    setFileUrl(file_url)
+  } 
   
 
   const postProduct = () => {
@@ -50,44 +67,41 @@ const Product = () => {
                   price: price,
                   describe: describe
               },
-          multipartFile: urlFile
+          multipartFile: fileUrl
       }
 
-      dispatch(__postProduct(product))
-      console.log(product)
+      console.log(product.multipartFile)
   }
 
-  const postProduct2 = async() => {
+  // const postProduct2 = async() => {
 
-    const product = {
-      postRequestDto:
-          {
-              title: title,
-              size: size,
-              price: price,
-              describe: describe
-          },
-      multipartFile: urlFile
-    }
+  //   const product = {
+  //     postRequestDto:
+  //         {
+  //             title: title,
+  //             size: size,
+  //             price: price,
+  //             describe: describe
+  //         },
+  //     multipartFile: urlFile
+  //   }
 
-    const token = getCookie("is_login")
-    console.log(token)
-    axios({
-      method: "post",
-      url: "http://54.180.122.99/api/product",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => { 
-        console.log(res)
-      })
-      .catch((error) => {
-        console.log(error.code, error.message);
-      });
-  };
-
-
+  //   const token = getCookie("is_login")
+  //   console.log(token)
+  //   axios({
+  //     method: "post",
+  //     url: "http://54.180.122.99/api/product",
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   })
+  //     .then((res) => { 
+  //       console.log(res)
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.code, error.message);
+  //     });
+  // };
 
 
 
@@ -100,14 +114,14 @@ const Product = () => {
           <Appstyle>
             <label htmlFor="ex_file">
               <div className="btnStart">
-                <img src={urlFile !== ''? urlFile : imagebutton} alt="btnStart" />
+                <img src={fileUrl !== ''? fileUrl : imagebutton} alt="btnStart" />
               </div>
             </label>
             <input
               type="file"
               id="ex_file"
               accept="image/jpg, image/png, image/jpeg"
-              onChange={handleChangeFile}
+              onChange={uploadFB}
             />
           </Appstyle>
         </Overlay>

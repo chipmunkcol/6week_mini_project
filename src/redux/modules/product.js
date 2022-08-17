@@ -45,7 +45,9 @@ export const __getProduct = createAsyncThunk(
     'getProduct',
     async (payload, thunkAPI) => {
         try {
-            const data = await axios.get(`http://54.180.122.99/api/product/${payload}`)
+            const token = getCookie("is_login")
+            console.log(payload)
+            const data = await axios.get(`http://54.180.122.99/api/product/${payload}`, {headers: {Authorization: token}})
             return thunkAPI.fulfillWithValue(data.data);
         } catch (error) {
             return thunkAPI.rejectWithValue(error);
