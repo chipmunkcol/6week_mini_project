@@ -39,11 +39,14 @@ function Product() {
     const postProduct = () => {
 
         const product = {
-            title: title,
-            size: size,
-            price: price,
-            describe: describe,
-            image: urlFile
+            postRequestDto:
+                {
+                    title: title,
+                    size: size,
+                    price: price,
+                    describe: describe
+                },
+            multipartFile: urlFile
         }
 
         dispatch(__postProduct(product))

@@ -14,22 +14,23 @@ function Main(){
 
     const { isLoading , error , products } = useSelector((state)=> state.products)
     console.log(isLoading, error, products)
-    
+    // const products = useSelector((state)=> state.products)
+    // console.log(products)
 
     useEffect(()=>{
-        // products()
+
         dispatch(__getProducts())
     },[dispatch])
     
     const navigate = useNavigate()
 
-    if (isLoading) {
+    if (products.lenth === 0) {
         return <h1 style={{backgroundColor:'yellow'}}>로딩중입니다...</h1>
     }
 
-    if (error) {
-        return <h1>{error}</h1>
-    }
+    // if (error) {
+    //     return <h1>{error}</h1>
+    // }
 
     return(
         <div>
@@ -41,10 +42,10 @@ function Main(){
                 {
                     products.map((val)=>
                         <Col key={val.id} style={{textAlign:'center'}} onClick={()=>{ navigate('/detail/'+val.id) }}>
-                                <Img productImg={val.image}></Img>
+                                <Img productImg={val.imgUrl}></Img>
                                 <div>{val.title}</div>
                                 <div>{val.size}</div>
-                                <div>❤ +{val.likes}</div>
+                                <div>❤ +{val.likesCnt}</div>
                         </Col>
                     )
                 }

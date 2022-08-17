@@ -4,39 +4,19 @@ import axios from 'axios';
 ///54.180.122.99 [backend server ip]
 //// 상품 관련 Axios!
 
+//1 Main 상품
+
 export const __getProducts = createAsyncThunk(
     'getProducts',
     async (payload, thunkAPI) => {
         try {
-            const data = await axios.get('http://localhost:3001/products')
+            const data = await axios.get('http://54.180.122.99/api/products')
             return thunkAPI.fulfillWithValue(data.data);
         } catch (error) {
             return thunkAPI.rejectWithValue(error);
         }
     }
 );
-export const __postProduct = createAsyncThunk(
-    'postProduct',
-    async (payload, thunkAPI) => {
-        try {
-            const data = axios.post("http://localhost:3001/products", payload)
-            return thunkAPI.fulfillWithValue(data.data)
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error)
-        }
-    }
-)
-export const __deleteProduct = createAsyncThunk(
-    'deleteProduct',
-    async (payload, thunkAPI) => {
-        try {
-            const data = axios.delete(`http://localhost:3001/products/${payload}`, payload)
-            return thunkAPI.fulfillWithValue(data.data)
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error)
-        }
-    }
-)
 
 
 export const productsSlice = createSlice({
@@ -62,8 +42,65 @@ export const productsSlice = createSlice({
     },
 })
 
+//Detail 상품
+export const __getProduct = createAsyncThunk(
+    'getProduct',
+    async (payload, thunkAPI) => {
+        try {
+            const data = await axios.get(`http://54.180.122.99/api/product/${payload}`)
+            return thunkAPI.fulfillWithValue(data.data);
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+        }
+    }
+);
+
+export const __postProduct = createAsyncThunk(
+    'postProduct',
+    async (payload, thunkAPI) => {
+        try {
+            const data = axios.post('http://54.180.122.99/api/product', payload)
+            return thunkAPI.fulfillWithValue(data.data)
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error)
+        }
+    }
+)
+export const __deleteProduct = createAsyncThunk(
+    'deleteProduct',
+    async (productId, thunkAPI) => {
+        try {
+            const data = axios.delete(`http://54.180.122.99/api/product/${productId}`, productId)
+            return thunkAPI.fulfillWithValue(data.data)
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error)
+        }
+    }
+)
 
 
+export const productSlice = createSlice({
+    name: 'product',
+    initialState: {
+        product: [],
+        isLoading: false,
+        error: null,
+    },
+    reducers: {},
+    extraReducers: {
+        [__getProduct.pending]: (state) => {
+            state.isLoading = true;
+        },
+        [__getProduct.fulfilled]: (state, action) => {
+            state.isLoading = false;
+            state.product = action.payload
+        },
+        [__getProduct.rejected]: (state, action) => {
+            state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
+            state.error = action.payload; // catch 된 error 객체를 state.error에 넣습니다.
+        },
+    },
+})
 
 
 //// 댓글 관련 Axios!!
@@ -83,7 +120,7 @@ export const __postComment = createAsyncThunk(
     'comment/postComment',
     async (payload, thunkAPI) => {
         try {
-            const data = await axios.post(`http://localhost:3001/comments/${payload}`, payload)
+            const data = await axios.post(`http://localhost:3001/comments`, payload)
             return thunkAPI.fulfillWithValue(data.data)
         } catch (error) {
             return thunkAPI.rejectWithValue(error)
@@ -134,7 +171,9 @@ export const commentSlice = createSlice({
 export default configureStore({
     reducer: {
         products: productsSlice.reducer,
+        product: productSlice.reducer,
         comments: commentSlice.reducer,
+
 
     }
 })
