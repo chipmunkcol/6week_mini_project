@@ -7,7 +7,11 @@ import user from '../../image/user.png';
 import lock from '../../image/lock.png';
 import loginfooter from '../../image/loginfooter.svg';
 import { useForm } from 'react-hook-form';
-import { signUpDB, signIdCheck, signNameCheck } from '../../redux/modules/user';
+import {
+  __postSignup,
+  __postIdCheck,
+  __postNicknameCheck,
+} from '../../redux/modules/signup';
 
 const Signup = (props) => {
   const {
@@ -17,22 +21,36 @@ const Signup = (props) => {
     getValues,
   } = useForm();
 
-  const [id, setId] = useState('');
-  const [pwd, setPwd] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [nickname, setNickname] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const userData = {
+    username: username,
+    password: password,
+    nickname: nickname,
+  };
+
+  const userName = {
+    username: username,
+  };
+
+  const Nickname = {
+    nickname: nickname,
+  };
+
   function onClickSignup() {
-    dispatch(signUpDB(id, pwd, nickname));
+    dispatch(__postSignup(userData));
   }
 
-  function onClickIdcheck() {
-    dispatch(signIdCheck(id));
+  function onIdcheck() {
+    dispatch(__postIdCheck(userName));
   }
 
-  function onClickNameCheck() {
-    dispatch(signNameCheck(nickname));
+  function onNicknamecheck() {
+    dispatch(__postNicknameCheck(Nickname));
   }
 
   return (
@@ -59,13 +77,13 @@ const Signup = (props) => {
                 // )}
                 image={user}
                 onChange={(e) => {
-                  setId(e.target.value);
+                  setUsername(e.target.value);
                 }}
                 placeholder="아이디"
               />
               <Idcheckbutton
                 onClick={() => {
-                  onClickIdcheck();
+                  onIdcheck();
                 }}
               >
                 중복확인
@@ -101,7 +119,7 @@ const Signup = (props) => {
               />
               <NicknameCheckbutton
                 onClick={() => {
-                  onClickNameCheck();
+                  onNicknamecheck();
                 }}
               >
                 중복확인
@@ -125,7 +143,7 @@ const Signup = (props) => {
               })}
               image={lock}
               onChange={(e) => {
-                setPwd(e.target.value);
+                setPassword(e.target.value);
               }}
               placeholder="비밀번호"
             />
@@ -148,7 +166,7 @@ const Signup = (props) => {
               })}
               image={lock}
               onChange={(e) => {
-                setPwd(e.target.value);
+                setPassword(e.target.value);
               }}
               placeholder="비밀번호를 다시 입력해주세요."
             />

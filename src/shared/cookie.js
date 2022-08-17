@@ -1,26 +1,48 @@
-//토큰관련 쿠키 저장/삭제 함수
+import { Cookies } from 'react-cookie';
 
-const getCookie = (name) => {
-  let value = '; ' + document.cookie;
-  let parts = value.split(`; ${name}=`);
-  if (parts.length === 2) {
-    return parts.pop().split(';').shift();
-  }
-};
-// 쿠키에 저장하는 함수
-const setCookie = (name, value, exp = 1) => {
-  let date = new Date();
-  // 날짜를 만들어줍니다.
-  date.setTime(date.getTime() + exp * 60 * 60 * 1000);
-  // 저장!
-  document.cookie = `${name}=${value};expires=${date.toUTCString()};path='/'`;
-  console.log(name, value, exp);
-};
+const cookies = new Cookies();
 
-const deleteCookie = (name) => {
-  let date = new Date('2022-08-19').toUTCString();
-  console.log('expired!', date);
-  document.cookie = name + '=; expires=' + date;
+export const setAccessToken = (accessToken) => {
+  const today = new Date();
+  const expireDate = today.setDate(today.getDate() + 7);
+  console.log(accessToken);
+
+  return (
+    cookies.set('user_token', accessToken),
+    {
+      sameSite: 'strict',
+      path: '/',
+      expires: new Date(expireDate),
+    }
+  );
 };
 
-export { getCookie, setCookie, deleteCookie };
+export const setUserData = (userinfo) => {
+  const today = new Date();
+  const expireDate = today.setDate(today.getDate() + 7);
+  console.log(userinfo);
+  return (
+    cookies.set('user_data', userinfo),
+    {
+      sameSite: 'strict',
+      path: '/',
+      expires: new Date(expireDate),
+    }
+  );
+};
+
+export const getCookieToken = () => {
+  return cookies.get('user_token');
+};
+
+export const getUserData = () => {
+  return cookies.get('user_data');
+};
+
+export const removeCookieToken = () => {
+  return cookies.remove('user_token', { sameSite: 'strict', path: '/' });
+};
+
+export const removeUserData = () => {
+  return cookies.remove('user_data', { sameSite: 'strict', path: '/' });
+};
