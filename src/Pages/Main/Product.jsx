@@ -2,94 +2,81 @@ import React from 'react';
 import styled from 'styled-components';
 import { useSelector, dispatch } from 'react-redux';
 import Banner from '../../Component/Banner';
-import { getCookie } from '../../shared/cookie';
+import { getCookieToken } from '../../shared/cookie';
 import checkbutton from '../../image/checkbutton.png';
 import imagebutton from '../../image/imagebutton.jpg';
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useDispatch } from "react-redux";
+import { useDispatch } from 'react-redux';
 import { __postProduct } from '../../redux/modules/product';
-import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { ref, uploadBytes } from 'firebase/storage'
-
-
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { ref, uploadBytes } from 'firebase/storage';
 
 const Product = () => {
+  const [urlFile, setUrlFile] = useState('');
 
-  const [urlFile, setUrlFile] = useState('')
+  const [title, setTitle] = useState();
+  const [size, setSize] = useState();
+  const [price, setPrice] = useState();
+  const [describe, setDescribe] = useState();
 
-  const [title, setTitle] = useState()
-  const [size, setSize] = useState()
-  const [price, setPrice] = useState()
-  const [describe, setDescribe] = useState()
-
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChangeFile = (e) => {
+    let reader = new FileReader();
 
-      let reader = new FileReader();
-
-      if (e.target.files[0]) {
-          reader.readAsDataURL(e.target.files[0])
-      }
-      reader.onload = () => {
-          const fileUrl = reader.result;
-          setUrlFile(fileUrl)
-      }
-  }
-  
+    if (e.target.files[0]) {
+      reader.readAsDataURL(e.target.files[0]);
+    }
+    reader.onload = () => {
+      const fileUrl = reader.result;
+      setUrlFile(fileUrl);
+    };
+  };
 
   const postProduct = () => {
-
-      const product = {
-          postRequestDto:
-              {
-                  title: title,
-                  size: size,
-                  price: price,
-                  describe: describe
-              },
-          multipartFile: urlFile
-      }
-
-      dispatch(__postProduct(product))
-      console.log(product)
-  }
-
-  const postProduct2 = async() => {
-
     const product = {
-      postRequestDto:
-          {
-              title: title,
-              size: size,
-              price: price,
-              describe: describe
-          },
-      multipartFile: urlFile
-    }
+      postRequestDto: {
+        title: title,
+        size: size,
+        price: price,
+        describe: describe,
+      },
+      multipartFile: urlFile,
+    };
 
-    const token = getCookie("is_login")
-    console.log(token)
+    dispatch(__postProduct(product));
+    console.log(product);
+  };
+
+  const postProduct2 = async () => {
+    const product = {
+      postRequestDto: {
+        title: title,
+        size: size,
+        price: price,
+        describe: describe,
+      },
+      multipartFile: urlFile,
+    };
+
+    const token = getCookieToken;
+    console.log(token);
     axios({
-      method: "post",
-      url: "http://54.180.122.99/api/product",
+      method: 'post',
+      url: 'http://54.180.122.99/api/product',
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-      .then((res) => { 
-        console.log(res)
+      .then((res) => {
+        console.log(res);
       })
       .catch((error) => {
         console.log(error.code, error.message);
       });
   };
-
-
-
-
 
   return (
     <ProductContainer>
@@ -100,7 +87,10 @@ const Product = () => {
           <Appstyle>
             <label htmlFor="ex_file">
               <div className="btnStart">
-                <img src={urlFile !== ''? urlFile : imagebutton} alt="btnStart" />
+                <img
+                  src={urlFile !== '' ? urlFile : imagebutton}
+                  alt="btnStart"
+                />
               </div>
             </label>
             <input
@@ -117,7 +107,9 @@ const Product = () => {
               type="text"
               placeholder="제품명"
               padding={'110px'}
-              onChange={(e)=>{setTitle(e.target.value);}}
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
             ></AddINput>
           </Name>
           <Price>
@@ -125,7 +117,9 @@ const Product = () => {
               type="text"
               placeholder="가격"
               padding={'120px'}
-              onChange={(e)=>{setPrice(e.target.value);}}
+              onChange={(e) => {
+                setPrice(e.target.value);
+              }}
             ></AddINput>
           </Price>
           <Dosc>
@@ -133,22 +127,32 @@ const Product = () => {
               type="text"
               placeholder="설명"
               padding={'120px'}
-              onChange={(e)=>{setDescribe(e.target.value)}}
+              onChange={(e) => {
+                setDescribe(e.target.value);
+              }}
             ></AddINput>
           </Dosc>
           <Box>
             <Size>
-              <SizeInput type="text" placeholder="사이즈" onChange={(e)=>{setSize(e.target.value);}}></SizeInput>
+              <SizeInput
+                type="text"
+                placeholder="사이즈"
+                onChange={(e) => {
+                  setSize(e.target.value);
+                }}
+              ></SizeInput>
             </Size>
-            <Registration onClick={()=>{
-                if(window.confirm("상품등록을 하시겠어요?")) {
+            <Registration
+              onClick={() => {
+                if (window.confirm('상품등록을 하시겠어요?')) {
                   // postProduct()
-                  postProduct()
-                  navigate('/')
-              } else {
-                  alert("취소합니다.");
-              }
-            }}></Registration>
+                  postProduct();
+                  navigate('/');
+                } else {
+                  alert('취소합니다.');
+                }
+              }}
+            ></Registration>
           </Box>
         </TextBox>
       </ProductBox>
