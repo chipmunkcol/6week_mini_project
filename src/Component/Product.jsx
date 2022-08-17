@@ -1,37 +1,48 @@
 // import Grid from '../styles/Grid';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import shoes1 from '../image/shoes1.jpg';
 import heartbutton from '../image/heartbutton.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { __getProducts } from '../redux/modules/product';
+import { useNavigate } from 'react-router-dom';
 
 //헤더 고정, (좋아요 카운트, 이미지, 이름, 닉네임), Navigate 넣기
 
 const Product = () => {
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { isLoading , error , products } = useSelector((state)=> state.products)
+  // console.log(isLoading, error, products)
+
+  const product = useSelector((state)=> state)
+  // console.log(products)
+
+  useEffect(()=>{
+    dispatch(__getProducts())
+  },[dispatch])
+
+
+  if (products.lenth === 0) {
+    return <h1 style={{backgroundColor:'yellow'}}>로딩중입니다...</h1>
+  }
+
   return (
     <Productcontainer>
-      <Productbox>
-        <Overlay>
-          <Heartbutton />
-          <HeartText>15</HeartText>
-        </Overlay>
-        <Productimg />
-        <Producttext>나이키 줌 플라이 5 A.I.R. Hola Lou</Producttext>
-      </Productbox>
-
-      <Productbox>
-        <Productimg />
-        <Producttext>나이키 줌 플라이 5 A.I.R. Hola Lou</Producttext>
-      </Productbox>
-
-      <Productbox>
-        <Productimg />
-        <Producttext>나이키 줌 플라이 5 A.I.R. Hola Lou</Producttext>
-      </Productbox>
-
-      <Productbox>
-        <Productimg />
-        <Producttext>나이키 줌 플라이 5 A.I.R. Hola Lou</Producttext>
-      </Productbox>
+      {
+        products.map((val)=>
+          <Productbox key={val.id} onClick={()=>{ navigate('/detail/'+val.id) }}>
+          <Overlay>
+            <Heartbutton />
+            <HeartText>{products.likesCnt}</HeartText>
+          </Overlay>
+          <Productimg productImg={val.imgUrl}/>
+          <Producttext>{products.title}</Producttext>
+        </Productbox>
+        )
+      }
+      
     </Productcontainer>
   );
 };
@@ -58,7 +69,7 @@ const Productimg = styled.div`
   width: 400px;
   height: 250px;
   display: block;
-  background: url(${shoes1});
+  background: url(${props => props.productImg});
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;

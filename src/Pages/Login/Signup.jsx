@@ -50,13 +50,13 @@ const Signup = (props) => {
               <Idcheckinput
                 id="userId"
                 type="text"
-                {...register('userId', {
-                  required: true,
-                  pattern: {
-                    value: /^[a-zA-Z]*$/,
-                    message: '영문, 숫자 조합으로 4~12자 입력해주세요.',
-                  },
-                })}
+                // {...register('userId', {
+                //   required: true,
+                //   pattern: {
+                //     value: /^[a-zA-Z]*$/,
+                //     message: '영문, 숫자 조합으로 4~12자 입력해주세요.',
+                //   },
+                // )}
                 image={user}
                 onChange={(e) => {
                   setId(e.target.value);

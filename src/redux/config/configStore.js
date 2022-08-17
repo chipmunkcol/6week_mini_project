@@ -1,6 +1,8 @@
 import { applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { productSlice, productsSlice } from '../modules/product';
+import { commentSlice } from '../modules/comment';
 import {
   loginDB,
   logoutDB,
@@ -13,6 +15,7 @@ import {
   signNameCheck,
   reducer,
 } from '../modules/user';
+
 export const store = configureStore(
   {
     reducer: {
@@ -26,6 +29,10 @@ export const store = configureStore(
       signIdCheck: signIdCheck,
       signNameCheck: signNameCheck,
       reducer: reducer,
+      products: productsSlice.reducer,
+      product: productSlice.reducer,
+      comments: commentSlice.reducer,
+      
     },
   },
   applyMiddleware(thunk)

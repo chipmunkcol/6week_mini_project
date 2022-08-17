@@ -11,7 +11,7 @@ const Banner = (props) => {
   const dispatch = useDispatch();
   const is_login = getCookie('is_login');
   const user_info = useSelector((state) => state.user);
-  console.log(user_info);
+  // console.log(user_info);
 
   if (
     //로그인, 회원가입 화면에서는 헤더를 보여주지 않음.
@@ -29,14 +29,14 @@ const Banner = (props) => {
       />
       <HeaderText
         onClick={() => {
-          navigate('./mypage');
+          navigate('/mypage');
         }}
       >
         사용자님
       </HeaderText>
       <HeaderText
         onClick={() => {
-          navigate('./product');
+          navigate('/product');
         }}
       >
         상품등록
