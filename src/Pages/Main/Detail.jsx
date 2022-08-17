@@ -8,7 +8,7 @@ import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect, } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // import axios from "axios";
-import { __getProducts, __getComment, __postComment, __deleteComment } from "../../store";
+import { __getProducts, __deleteProduct, __getComment, __postComment, __deleteComment } from "../../store";
 
 
 
@@ -35,6 +35,8 @@ useEffect(()=>{
 
 
 
+
+
     if (products.length === 0) {
         return <h1 style={{backgroundColor:'yellow'}}>로딩중입니다...</h1>
     }
@@ -45,7 +47,18 @@ useEffect(()=>{
 
     return(
         <div>
-        <div style={{width:'90%', height:'30px', margin:'0 auto 0 auto',backgroundColor:'#ded8c8'}}></div>
+        <div style={{width:'90%', height:'30px', margin:'0 auto 0 auto',backgroundColor:'#ded8c8'}}>
+            <FontAwesomeIcon icon={faTrashCan} type='button' size="lg" style={{float:'right', margin:'5px 21px 0 0', color:'crimson'}} onClick={()=>{
+                if(window.confirm("정말 삭제하나요?")) {
+                    dispatch(__deleteProduct(products[params].id))
+                    alert("삭제되었습니다.");
+                    navigate('/')
+                } else {
+                    alert("취소합니다.");
+                }
+                
+            }}/>
+        </div>
         <div style={{border:'1px solid #ced4da', width:'90%', margin:'0 auto 0 auto', padding:'30px'}}>
             <div style={{display:'flex', flexDirection:'row'}}>
                 

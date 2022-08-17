@@ -4,7 +4,7 @@ import axios from 'axios';
 import { TextField, Button } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import { useDispatch } from "react-redux";
-import { __postProducts } from "../../store";
+import { __postProduct } from "../../store";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { ref, uploadBytes } from 'firebase/storage'
 import Icon from '@mui/material/Icon';
@@ -46,8 +46,7 @@ function Product() {
             image: urlFile
         }
 
-        dispatch(__postProducts(product))
-        navigate('/')
+        dispatch(__postProduct(product))
     }
 
     // const uploadFB = async(e)=>{
@@ -94,7 +93,12 @@ function Product() {
                     <div><TextField style={{width:'60%', margin:'0 0 30px 0'}} id="standard-multiline-static" label="제품설명" multiline rows={4} variant="standard" onChange={(e)=>{setDescribe(e.target.value)}}/></div>
                     
                     <Button variant="contained" endIcon={<SendIcon />} onClick={()=>{
-                        postProduct();
+                        if(window.confirm("상품등록을 하시겠어요?")) {
+                            postProduct()
+                            navigate('/')
+                        } else {
+                            alert("취소합니다.");
+                        }
                     }}>
                     저장하기
                     </Button>

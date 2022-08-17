@@ -15,8 +15,8 @@ export const __getProducts = createAsyncThunk(
         }
     }
 );
-export const __postProducts = createAsyncThunk(
-    'postProducts',
+export const __postProduct = createAsyncThunk(
+    'postProduct',
     async (payload, thunkAPI) => {
         try {
             const data = axios.post("http://localhost:3001/products", payload)
@@ -26,11 +26,11 @@ export const __postProducts = createAsyncThunk(
         }
     }
 )
-export const __deleteProducts = createAsyncThunk(
-    'deleteProducts',
-    async (productId, thunkAPI) => {
+export const __deleteProduct = createAsyncThunk(
+    'deleteProduct',
+    async (payload, thunkAPI) => {
         try {
-            const data = axios.delete(`http://localhost:3001/products/${productId}`, productId)
+            const data = axios.delete(`http://localhost:3001/products/${payload}`, payload)
             return thunkAPI.fulfillWithValue(data.data)
         } catch (error) {
             return thunkAPI.rejectWithValue(error)

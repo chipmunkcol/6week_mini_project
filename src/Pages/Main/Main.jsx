@@ -13,7 +13,7 @@ function Main(){
     const dispatch = useDispatch();
 
     const { isLoading , error , products } = useSelector((state)=> state.products)
-    // console.log(isLoading, error, products)
+    console.log(isLoading, error, products)
     
 
     useEffect(()=>{
