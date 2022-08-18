@@ -15,6 +15,7 @@ import { storage } from '../../shared/firebase';
 import { initializeApp } from 'firebase/app';
 import { getStorage } from 'firebase/storage';
 
+
 const Product = () => {
   // const [urlFile, setUrlFile] = useState('')
   const [fileUrl, setFileUrl] = useState('');

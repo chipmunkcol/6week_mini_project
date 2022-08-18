@@ -6,7 +6,10 @@ import heartbutton from '../image/heartbutton.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { __getProducts } from '../redux/modules/product';
 import { useNavigate } from 'react-router-dom';
-
+import { getCookieToken } from '../shared/cookie';
+  
+const usertoken = getCookieToken();
+console.log(usertoken)
 //헤더 고정, (좋아요 카운트, 이미지, 이름, 닉네임), Navigate 넣기
 
 const Product = () => {
@@ -23,7 +26,8 @@ const Product = () => {
   }, [dispatch]);
 
   if (products.lenth === 0) {
-    return <h1 style={{ backgroundColor: 'yellow' }}>로딩중입니다...</h1>;
+    return 
+    <h1 style={{ backgroundColor: 'yellow' }}>로딩중입니다...</h1>;
   }
 
   return (
@@ -32,7 +36,7 @@ const Product = () => {
         <Productbox
           key={val.id}
           onClick={() => {
-            navigate('/detail/' + val.id);
+            usertoken !== undefined ? navigate('/detail/' + val.id) : navigate('/login')
           }}
         >
           <Overlay>

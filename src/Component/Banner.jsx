@@ -12,6 +12,10 @@ import {
 import styled from 'styled-components';
 import nikelogo from '../image/nikelogo.png';
 
+
+const usertoken = getCookieToken();
+console.log(usertoken)
+
 const Banner = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -45,7 +49,7 @@ const Banner = () => {
           </HeaderText>
           <HeaderText
             onClick={() => {
-              navigate('/product');
+              usertoken !== undefined ? navigate('/product') : navigate('/login')
             }}
           >
             상품등록
@@ -62,9 +66,9 @@ const Banner = () => {
         <>
           <HeaderText
             onClick={() => {
-              navigate('/product');
+              usertoken !== undefined ? navigate('/product') : navigate('/login')
             }}
-          >
+            >
             상품등록
           </HeaderText>
           <HeaderText
