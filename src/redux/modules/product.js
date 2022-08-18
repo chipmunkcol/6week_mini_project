@@ -14,9 +14,7 @@ export const __getProducts = createAsyncThunk(
   'getProducts',
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get('http://54.180.122.99/api/products', {
-        headers: { authorization: usertoken },
-      });
+      const data = await axios.get('http://54.180.122.99/api/products', )
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -50,11 +48,11 @@ export const productsSlice = createSlice({
 //Detail 상품
 export const __getProduct = createAsyncThunk(
     'getProduct',
-    async (payload, thunkAPI) => {
+    async (productId, thunkAPI) => {
         try {
-            const token = getCookieToken("is_login")
-            console.log(payload)
-            const data = await axios.get(`http://54.180.122.99/api/product/${payload}`, {headers: {Authorization: token}})
+            console.log(productId)
+            const data = await axios.get(`http://54.180.122.99/api/product/${productId}`, {
+                headers: {authorization: usertoken}})
             return thunkAPI.fulfillWithValue(data.data);
         } catch (error) {
             return thunkAPI.rejectWithValue(error);
@@ -63,35 +61,30 @@ export const __getProduct = createAsyncThunk(
 );
 
 export const __postProduct = createAsyncThunk(
-  'postProduct',
-  async (payload, thunkAPI) => {
-    try {
-      // console.log(payload)
-
-      const token = getCookieToken;
-      console.log(payload);
-      const data = axios.post('http://54.180.122.99/api/product', payload, {
-        headers: { Authorization: token },
-      });
-
-      return thunkAPI.fulfillWithValue(data.data);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
+    'postProduct',
+    async (payload, thunkAPI) => {
+        try {
+            console.log(usertoken)
+            console.log(payload);
+            const data = axios.post('http://54.180.122.99/api/product', payload, {
+                headers: {authorization: usertoken},});
+            return thunkAPI.fulfillWithValue(data.data);
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+        }
   }
 );
+
 export const __deleteProduct = createAsyncThunk(
   'deleteProduct',
   async (productId, thunkAPI) => {
-    try {
-      const data = axios.delete(
-        `http://54.180.122.99/api/product/${productId}`,
-        productId
-      );
-      return thunkAPI.fulfillWithValue(data.data);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
+      try {
+        const data = axios.delete(`http://54.180.122.99/api/product/${productId}`, {
+            headers: {authorization: usertoken},});
+        return thunkAPI.fulfillWithValue(data.data);
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error);
+      }
   }
 );
 

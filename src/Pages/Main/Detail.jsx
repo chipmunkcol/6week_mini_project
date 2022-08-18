@@ -18,12 +18,16 @@ import { __getComment, __postComment, __deleteComment } from '../../redux/module
 function Detail() {
 
 const [comment, setComment] = useState('')
+
 const [reLoading, setReLoading] = useState(true)
 
 const { isLoading, error, product } = useSelector((state)=> state.product)
-// console.log( isLoading, error, product )
+console.log( product )
+const commentList = product.commentList
+console.log(commentList)
 const { isLoading2 , error2 , comments } = useSelector((state)=> state.comments)
-// console.log(isLoading2, error2, comments)
+// const comments = useSelector((state)=> state.comments)
+console.log(comments)
 
 const dispatch = useDispatch()
 const navigate = useNavigate()
@@ -34,7 +38,7 @@ const params = useParams().id
 
 useEffect(()=>{
     dispatch(__getProduct(params))
-    dispatch(__getComment())
+    // dispatch(__getComment(params))
 },[reLoading])
 
 
@@ -42,7 +46,7 @@ useEffect(()=>{
 
 
     if (product.length === 0) {
-        return <h1 style={{backgroundColor:'yellow'}}>로딩중입니다...</h1>
+        return <h1 style={{backgroundColor:'yellow', height:'500px', display:'fles', justifyContent:'center',alignItems:'center'}}>로딩중입니다...</h1>
     }
 
     // if (error || error2) {
@@ -54,8 +58,8 @@ useEffect(()=>{
         <div style={{width:'90%', height:'30px', margin:'0 auto 0 auto',backgroundColor:'#ded8c8'}}>
             <FontAwesomeIcon icon={faTrashCan} type='button' size="lg" style={{float:'right', margin:'5px 21px 0 0', color:'crimson'}} onClick={()=>{
                 if(window.confirm("정말 삭제하나요?")) {
-                    console.log(product.id)
-                    dispatch(__deleteProduct(product.id))
+                    console.log(params)
+                    dispatch(__deleteProduct(params))
                     alert("삭제되었습니다.");
                     navigate('/')
                 }
@@ -87,10 +91,10 @@ useEffect(()=>{
 
                 <div style={{height:'80%', overflow: 'auto'}}>
                     {
-                        comments.map((val)=>
+                        commentList.map((val)=>
                             <div key={val.id}>
                                 <Reply>
-                                    <span style={{display:'flex', width:'90%'}}>[nickName]: {val.comment}</span> 
+                                    <span style={{display:'flex', width:'90%'}}>{val.nickname}: {val.content}</span> 
                                     <span style={{width:'10%'}}><FontAwesomeIcon icon={faTrashCan} type='button' size="lg" onClick={()=>{
                                         dispatch(__deleteComment(val.id))
                                         setTimeout(() => {
@@ -108,7 +112,8 @@ useEffect(()=>{
                         
                         <Button variant="outline-secondary" id="button-addon2" onClick={()=>{
                             if (comment !== '') {
-                                // dispatch(__postComment([{comment: comment},{productId: params}]))
+                                const postComment = {comment: comment, productId: params}
+                                dispatch(__postComment(postComment))
                                 setTimeout(() => {
                                     setReLoading(!reLoading)
                                 }, 500);

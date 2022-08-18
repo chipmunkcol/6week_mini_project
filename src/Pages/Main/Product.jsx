@@ -65,6 +65,7 @@ const Product = () => {
       }
 
       console.log(product)
+      dispatch(__postProduct(product))
   }
 
   // const postProduct2 = async() => {
