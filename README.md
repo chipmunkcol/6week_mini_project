@@ -101,4 +101,4 @@ This is not for real commercial project, Its only for pratice.
 
 - YouTube
 
-[GitHub - chipmunkcol/Hanghae99_MiniProject: 미니프로젝트!(6주차 팀과제)]([https://github.com/chipmunkcol/Hanghae99_MiniProject](https://www.youtube.com/watch?v=t6l4WY7bRCk))<br><br>
+[Youtube - chipmunkcol/Hanghae99_MiniProject: 미니프로젝트!(6주차 팀과제)]([https://github.com/chipmunkcol/Hanghae99_MiniProject](https://www.youtube.com/watch?v=t6l4WY7bRCk))<br><br>
