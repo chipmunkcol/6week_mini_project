@@ -6,7 +6,7 @@ import Login from '../Pages/Login/Login';
 import Signup from '../Pages/Login/Signup';
 import Banner from '../Component/Banner';
 import Detail from '../Pages/Main/Detail';
-import MyPage from '../Pages/Main/Mypage';
+import MyPage from '../Pages/Main/MyPage';
 
 const Router = () => {
   return (
