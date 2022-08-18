@@ -9,93 +9,54 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { __postProduct } from '../../redux/modules/product';
-import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { storage } from '../../shared/firebase'
-import { initializeApp } from "firebase/app";
-import { getStorage } from "firebase/storage";
-
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storage } from '../../shared/firebase';
+import { initializeApp } from 'firebase/app';
+import { getStorage } from 'firebase/storage';
+import { useForm } from 'react-hook-form';
 
 const Product = () => {
   // const [urlFile, setUrlFile] = useState('')
-  const [fileUrl, setFileUrl] = useState('')
+  const [fileUrl, setFileUrl] = useState('');
   const [title, setTitle] = useState();
   const [size, setSize] = useState();
   const [price, setPrice] = useState();
   const [describe, setDescribe] = useState();
 
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const handleChangeFile = (e) => {
-
-  //     let reader = new FileReader();
-
-  //     if (e.target.files[0]) {
-  //         reader.readAsDataURL(e.target.files[0])
-  //     }
-  //     reader.onload = () => {
-  //         const fileUrl = reader.result;
-  //         setUrlFile(fileUrl)
-  //     }
-  // }
-
   const uploadFB = async (e) => {
-    console.log(e.target.files)
+    console.log(e.target.files);
     const uploaded_file = await uploadBytes(
       ref(storage, `images/${e.target.files[0].name}`),
       e.target.files[0]
     );
-    console.log(uploaded_file)
-  
-    const file_url = await getDownloadURL(uploaded_file.ref)
-  
-    setFileUrl(file_url)
-  } 
-  
+    console.log(uploaded_file);
+
+    const file_url = await getDownloadURL(uploaded_file.ref);
+
+    setFileUrl(file_url);
+  };
 
   const postProduct = () => {
-
-      const product = {
-        title: title,
-        size: size,
-        price: price,
-        content: describe,
-        imgUrl: fileUrl,
-      }
-
-      console.log(product)
-  }
-
-  // const postProduct2 = async() => {
-
-  //   const product = {
-  //     postRequestDto:
-  //         {
-  //             title: title,
-  //             size: size,
-  //             price: price,
-  //             describe: describe
-  //         },
-  //     multipartFile: urlFile
-  //   }
-
-  //   const token = getCookie("is_login")
-  //   console.log(token)
-  //   axios({
-  //     method: "post",
-  //     url: "http://54.180.122.99/api/product",
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   })
-  //     .then((res) => { 
-  //       console.log(res)
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.code, error.message);
-  //     });
-  // };
+    const product = {
+      title: title,
+      size: size,
+      price: price,
+      content: describe,
+      imgUrl: fileUrl,
+    };
+    dispatch(__postProduct(product));
+    console.log(product);
+  };
 
   return (
     <ProductContainer>
@@ -106,8 +67,10 @@ const Product = () => {
           <Appstyle>
             <label htmlFor="ex_file">
               <div className="btnStart">
-                <img src={fileUrl !== ''? fileUrl : imagebutton} alt="btnStart" />
-
+                <img
+                  src={fileUrl !== '' ? fileUrl : imagebutton}
+                  alt="btnStart"
+                />
               </div>
             </label>
             <input
@@ -133,6 +96,11 @@ const Product = () => {
             <AddINput
               type="text"
               placeholder="가격"
+              onKeyDown={(e) => {
+                if (!/^[0-9]+$/.test(e.key) && e.key.length === 1) {
+                  alert('숫자로 입력해주십시오.');
+                }
+              }}
               padding={'120px'}
               onChange={(e) => {
                 setPrice(e.target.value);
@@ -154,6 +122,11 @@ const Product = () => {
               <SizeInput
                 type="text"
                 placeholder="사이즈"
+                onKeyDown={(e) => {
+                  if (!/^[0-9]+$/.test(e.key) && e.key.length === 1) {
+                    alert('숫자로 입력해주십시오.');
+                  }
+                }}
                 onChange={(e) => {
                   setSize(e.target.value);
                 }}

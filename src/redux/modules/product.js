@@ -4,7 +4,6 @@ import {
   createAsyncThunk,
 } from '@reduxjs/toolkit';
 import axios from 'axios';
-
 import { getCookieToken } from '../../shared/cookie';
 
 const usertoken = getCookieToken();
@@ -49,29 +48,28 @@ export const productsSlice = createSlice({
 
 //Detail 상품
 export const __getProduct = createAsyncThunk(
-    'getProduct',
-    async (payload, thunkAPI) => {
-        try {
-            const token = getCookieToken("is_login")
-            console.log(payload)
-            const data = await axios.get(`http://54.180.122.99/api/product/${payload}`, {headers: {Authorization: token}})
-            return thunkAPI.fulfillWithValue(data.data);
-        } catch (error) {
-            return thunkAPI.rejectWithValue(error);
+  'getProduct',
+  async (payload, thunkAPI) => {
+    try {
+      const data = await axios.get(
+        `http://54.180.122.99/api/product/${payload}`,
+        {
+          headers: { Authorization: usertoken },
         }
+      );
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
     }
+  }
 );
 
 export const __postProduct = createAsyncThunk(
   'postProduct',
   async (payload, thunkAPI) => {
     try {
-      // console.log(payload)
-
-      const token = getCookieToken;
-      console.log(payload);
       const data = axios.post('http://54.180.122.99/api/product', payload, {
-        headers: { Authorization: token },
+        headers: { Authorization: usertoken },
       });
 
       return thunkAPI.fulfillWithValue(data.data);
