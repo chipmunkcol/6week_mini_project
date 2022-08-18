@@ -29,7 +29,6 @@ const Login = (props) => {
 
   function onClickLogin() {
     dispatch(__postUsers(userData));
-    navigate('/');
   }
 
   return (

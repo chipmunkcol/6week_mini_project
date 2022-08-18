@@ -20,6 +20,7 @@ export const __postUsers = createAsyncThunk(
             'login-token',
             response.headers.authorization
           );
+          document.location.href = '/';
         });
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {

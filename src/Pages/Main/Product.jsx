@@ -9,16 +9,15 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { __postProduct } from '../../redux/modules/product';
-import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { storage } from '../../shared/firebase'
-import { initializeApp } from "firebase/app";
-import { getStorage } from "firebase/storage";
-
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storage } from '../../shared/firebase';
+import { initializeApp } from 'firebase/app';
+import { getStorage } from 'firebase/storage';
 
 const Product = () => {
   // const [urlFile, setUrlFile] = useState('')
-  const [fileUrl, setFileUrl] = useState('')
+  const [fileUrl, setFileUrl] = useState('');
   const [title, setTitle] = useState();
   const [size, setSize] = useState();
   const [price, setPrice] = useState();
@@ -41,34 +40,31 @@ const Product = () => {
   // }
 
   const uploadFB = async (e) => {
-    console.log(e.target.files)
+    console.log(e.target.files);
     const uploaded_file = await uploadBytes(
       ref(storage, `images/${e.target.files[0].name}`),
       e.target.files[0]
     );
-    console.log(uploaded_file)
-  
-    const file_url = await getDownloadURL(uploaded_file.ref)
-  
-    setFileUrl(file_url)
-  } 
-  
+    console.log(uploaded_file);
+
+    const file_url = await getDownloadURL(uploaded_file.ref);
+
+    setFileUrl(file_url);
+  };
 
   const postProduct = () => {
+    const product = {
+      title: title,
+      size: size,
+      price: price,
+      content: describe,
+      imgUrl: fileUrl,
+    };
 
-      const product = {
-        title: title,
-        size: size,
-        price: price,
-        content: describe,
-        imgUrl: fileUrl,
-      }
+    console.log(product);
+    dispatch(__postProduct(product));
+  };
 
-      console.log(product)
-      dispatch(__postProduct(product))
-  }
-
- 
   return (
     <ProductContainer>
       <Banner />
@@ -78,8 +74,10 @@ const Product = () => {
           <Appstyle>
             <label htmlFor="ex_file">
               <div className="btnStart">
-                <img src={fileUrl !== ''? fileUrl : imagebutton} alt="btnStart" />
-
+                <img
+                  src={fileUrl !== '' ? fileUrl : imagebutton}
+                  alt="btnStart"
+                />
               </div>
             </label>
             <input
@@ -166,18 +164,18 @@ const ProductTitle = styled.div`
 `;
 
 const ProductBox = styled.div`
-  width: 1600px;
+  width: 1300px;
   height: 600px;
   margin: 30px auto;
 `;
 
 const Appstyle = styled.div`
-  width: 1100px;
+  width: 800px;
   height: 600px;
   background: black;
   float: left;
   img {
-    width: 1100px;
+    width: 800px;
     height: 600px;
   }
   label {
@@ -202,7 +200,7 @@ const Overlay = styled.div`
   position: absolute;
   background: rgba(0, 0, 0, 0.5);
   opacity: 0;
-  transition: all 3s;
+  transition: all 2s;
   :hover {
     opacity: 1;
   }
