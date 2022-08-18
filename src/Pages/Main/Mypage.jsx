@@ -1,13 +1,16 @@
+import Banner from '../../Component/Banner';
 
 
-function Mypage() {
+function MyPage() {
     return(
         <div>
-            <h1>마이페이지 입니다!</h1>
+            <Banner />
+
+
 
 
         </div>
     );
 }
 
-export default Mypage;
+export default MyPage;

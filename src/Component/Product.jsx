@@ -54,9 +54,9 @@ const Productcontainer = styled.div`
   height: 250px;
   margin: auto;
   margin-top: 50px;
+  justify-content: space-between;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   flex-wrap: wrap;
 `;
 const Productbox = styled.div`

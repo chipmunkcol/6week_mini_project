@@ -2,10 +2,11 @@ import Banner from '../../Component/Banner';
 import { getCookie } from '../../shared/cookie';
 
 // import { RESP } from "../../response";
+import HeartImg from '../../image/love.png';
 import styled from 'styled-components';
 import { Button, InputGroup, Form } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan, faHeart } from '@fortawesome/free-solid-svg-icons';
 
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -21,6 +22,7 @@ import {
   __postComment,
   __deleteComment,
 } from '../../redux/modules/comment';
+import { __postLike } from '../../redux/modules/like';
 
 function Detail() {
   const [comment, setComment] = useState('');
@@ -122,11 +124,25 @@ function Detail() {
             <div style={{ display: 'flex', margin: '10px' }}>
               <Title>Size</Title> <Desc>{product.size}</Desc>
             </div>
-            <div style={{ display: 'flex', margin: '10px' }}>
-              <Title>Like</Title> <Desc>❤ +{product.likesCnt}</Desc>
-            </div>
+
             <div style={{ display: 'flex', margin: '10px' }}>
               <Title>Price</Title> <Desc>{product.price}</Desc>
+            </div>
+            <div style={{ display: 'flex', margin: '10px' }}>
+              <Title>Like</Title>{' '}
+              <Desc
+                type="button"
+                onClick={() => {
+                  dispatch(__postLike(params));
+
+                  setTimeout(() => {
+                    setReLoading(!reLoading);
+                  }, 500);
+                }}
+              >
+                <img src={HeartImg} style={{ width: '10%' }} />
+                <span> + {product.likesCnt}</span>
+              </Desc>
             </div>
             <div
               style={{
