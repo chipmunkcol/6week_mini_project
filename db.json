@@ -1,0 +1,353 @@
+{
+  "comments": [
+    {
+      "id": 1,
+      "comment": "야호"
+    }
+  ],
+  "user": [
+    {
+      "id": 1,
+      "email": "이메일",
+      "nickname": "닉네임"
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "zxc123!!",
+      "id": 2
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "zxc123!!",
+      "id": 3
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "wojs1024!!",
+      "id": 4
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "wojs1024!!",
+      "id": 5
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "zxc123!!",
+      "id": 6
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "zxc123!!",
+      "id": 7
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "zxc123!!",
+      "id": 8
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "zxc123!!",
+      "id": 9
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "zxc123!!",
+      "id": 10
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "zxc123!!",
+      "id": 11
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "",
+      "id": 12
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "",
+      "id": 13
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "",
+      "id": 14
+    },
+    {
+      "email": "wjh2144@naver.com123",
+      "password": "",
+      "id": 15
+    },
+    {
+      "email": "zxc123@naver.com",
+      "password": "zxc123!!",
+      "id": 16
+    },
+    {
+      "email": "zxc123@naver.com",
+      "password": "asd123!!",
+      "id": 17
+    },
+    {
+      "email": "asd123@naver.com",
+      "password": "asd123!!",
+      "id": 18
+    },
+    {
+      "email": "123@zxc.com",
+      "password": "wojs1024!!",
+      "id": 19
+    },
+    {
+      "email": "wjh2144@abc.com",
+      "password": "zxc123!!",
+      "id": 20
+    },
+    {
+      "email": "zxc123@com.com",
+      "password": "zxc123!!",
+      "id": 21
+    },
+    {
+      "email": "zxc123@com.com",
+      "password": "zxc123!!",
+      "id": 22
+    },
+    {
+      "email": "zxc123@com.com",
+      "password": "zxc123!!",
+      "id": 23
+    },
+    {
+      "email": "wfdsa@naver.com",
+      "password": "wojs1024!!",
+      "id": 24
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "zxc123!!",
+      "id": 25
+    },
+    {
+      "email": "zxc123@naver.com",
+      "password": "zxc123!!",
+      "id": 26
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "zxc123!!",
+      "id": 27
+    },
+    {
+      "email": "11111@naver.com",
+      "password": "asd123%%",
+      "id": 28
+    },
+    {
+      "email": "wjh2144@abc.com",
+      "password": "wojs1024!!",
+      "id": 29
+    },
+    {
+      "email": "wjh2144@abc.com",
+      "password": "wojs1024!!",
+      "id": 30
+    },
+    {
+      "email": "wjh2144@abc.com",
+      "password": "wojs1024!!",
+      "id": 31
+    },
+    {
+      "email": "wjh2144@abc.com",
+      "password": "wojs1024!!",
+      "id": 32
+    },
+    {
+      "email": "dfafdas@nasver.com",
+      "password": "zxc123!!",
+      "id": 33
+    },
+    {
+      "email": "fdas@naver.com",
+      "password": "zxc123!!",
+      "id": 34
+    }
+  ],
+  "signUp": [
+    {
+      "id": 1,
+      "email": "이메일",
+      "password": "비밀번호",
+      "nickname": "닉네임"
+    },
+    {
+      "email": "wjh2144@zxc1234@.com",
+      "password": "wojs1024!1",
+      "nickname": "구미구미",
+      "id": 2
+    },
+    {
+      "email": "wjh2144@zxc1234@.com",
+      "password": "wojs1024!1",
+      "nickname": "구미구미",
+      "id": 3
+    },
+    {
+      "email": "wjh2144@zxc1234@.com",
+      "password": "wojs1024!1",
+      "nickname": "구미구미",
+      "id": 4
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "",
+      "nickname": "",
+      "id": 5
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "",
+      "nickname": "",
+      "id": 6
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "",
+      "nickname": "",
+      "id": 7
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "",
+      "nickname": "",
+      "id": 8
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "",
+      "nickname": "",
+      "id": 9
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "",
+      "nickname": "",
+      "id": 10
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "",
+      "nickname": "",
+      "id": 11
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "",
+      "nickname": "",
+      "id": 12
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "",
+      "nickname": "",
+      "id": 13
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "",
+      "nickname": "",
+      "id": 14
+    },
+    {
+      "email": "wjh2144@naver.com123",
+      "password": "",
+      "nickname": "",
+      "id": 15
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "zxc123!!",
+      "nickname": "곰이",
+      "id": 16
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "zxc123!!",
+      "nickname": "곰이",
+      "id": 17
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "zxc123!!",
+      "nickname": "곰이",
+      "id": 18
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "zxc123!!",
+      "nickname": "곰이",
+      "id": 19
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "zxc123!!",
+      "nickname": "곰이",
+      "id": 20
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "zxc123!!",
+      "nickname": "곰이",
+      "id": 21
+    },
+    {
+      "email": "wjh2144@naver.com",
+      "password": "zxc123!!",
+      "nickname": "곰이",
+      "id": 22
+    },
+    {
+      "id": 23
+    },
+    {
+      "id": 24
+    },
+    {
+      "id": 25
+    },
+    {
+      "email": "wjh2144@zxc123.com",
+      "password": "zxc123!!",
+      "nickname": "곰이",
+      "id": 26
+    },
+    {
+      "email": "wjh2144@zxc123.com",
+      "password": "zxc123!!",
+      "nickname": "곰이",
+      "id": 27
+    },
+    {
+      "email": "wjh2144@nav.com",
+      "password": "zxc123!!",
+      "nickname": "곰이",
+      "id": 28
+    },
+    {
+      "email": "zxc123@zxc123.com",
+      "password": "zxc123!!",
+      "nickname": "곰이",
+      "id": 29
+    },
+    {
+      "email": "zxc123@zxc123.com",
+      "password": "zxc123!!",
+      "nickname": "구밋",
+      "id": 30
+    }
+  ]
+}

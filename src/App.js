@@ -1,38 +1,37 @@
+import React from 'react';
+import Router from './route/router';
 import './App.css';
-
-import { useNavigate, Routes, Route } from 'react-router-dom'
-import Main from './Pages/Main/Main';
-import Mypage from './Pages/Main/Mypage';
-import Login from './Pages/Login/Login';
-import Signup from './Pages/Login/Signup';
-import Product from './Pages/Main/Product';
-import Banner from './Component/Banner';
-import Detail from './Pages/Main/Detail';
-
-
+// import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+// import { storage } from "./shared/firebase";
+// import { initializeApp } from "firebase/app";
+// import { getStorage } from "firebase/storage";
 
 function App() {
 
-  const navigate = useNavigate();
+// const uploadFB = async (e) => {
+//   console.log(e.target.files)
+//   const uploaded_file = await uploadBytes(
+//     ref(storage, `images/${e.target.files[0].name}`),
+//     e.target.files[0]
+//   );
+//   console.log(uploaded_file)
+
+//   const file_url = await getDownloadURL(uploaded_file.ref)
+
+//   console.log(file_url)
+// } 
 
   return (
     <div className="App">
-      Hello, react!
-      <Banner></Banner>
+      {/* <div>
+            <input type="file" 
+            onChange={uploadFB}
+            />
+
+      </div> */}
+      <Router />
       
-    
-    
-      <Routes>
-        <Route path='/' element={<Main></Main>}></Route>
-        <Route path='/mypage' element={<Mypage></Mypage>}></Route>
-        <Route path='/product' element={<Product></Product>}></Route>
-        
-        <Route path='/login' element={<Login></Login>}></Route>
-        <Route path='/signup' element={<Signup></Signup>}></Route>
-      </Routes>
-
-
-
+      
     </div>
   );
 }
