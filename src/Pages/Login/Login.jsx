@@ -7,7 +7,7 @@ import user from '../../image/user.png';
 import lock from '../../image/lock.png';
 import loginfooter from '../../image/loginfooter.svg';
 import { useForm } from 'react-hook-form';
-import { loginDB } from '../../redux/modules/user';
+import { __postUsers } from '../../redux/modules/login';
 
 const Login = (props) => {
   const {
@@ -18,12 +18,18 @@ const Login = (props) => {
 
   const navigate = useNavigate();
 
-  const [id, setId] = useState('');
-  const [pwd, setPwd] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
 
+  const userData = {
+    username: username,
+    password: password,
+  };
+
   function onClickLogin() {
-    dispatch(loginDB(id, pwd));
+    dispatch(__postUsers(userData));
+    navigate('/');
   }
 
   return (
@@ -46,7 +52,7 @@ const Login = (props) => {
               })}
               image={user}
               onChange={(e) => {
-                setId(e.target.value);
+                setUsername(e.target.value);
               }}
               placeholder="아이디"
             />
@@ -70,7 +76,7 @@ const Login = (props) => {
               // })}
               image={lock}
               onChange={(e) => {
-                setPwd(e.target.value);
+                setPassword(e.target.value);
               }}
               placeholder="비밀번호"
             />

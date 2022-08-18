@@ -4,14 +4,23 @@ import { useSelector, useDispatch } from 'react-redux';
 import Banner from '../../Component/Banner';
 import SliderBanner from '../../Component/SliderBanner';
 import Product from '../../Component/Product';
-import { getCookie } from '../../shared/cookie';
-import { loginCheckDB } from '../../redux/modules/user';
+import { getCookieToken } from '../../shared/cookie';
+import { __getProducts } from '../../redux/modules/product';
 
 const Main = () => {
+  const { isLoading, error, products } = useSelector((state) => state.products);
+  console.log();
   const dispatch = useDispatch();
-  const token = getCookie('is_login');
+
+  const cookie = getCookieToken();
+
+  if (cookie) {
+    console.log('cookie');
+  }
+
   useEffect(() => {
-    dispatch(loginCheckDB);
+    dispatch(__getProducts());
+    if (getCookieToken('user_token'));
   }, []);
 
   return (

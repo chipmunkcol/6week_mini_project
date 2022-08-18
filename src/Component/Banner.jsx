@@ -1,24 +1,30 @@
 // import { Navbar, Nav, Container } from 'react-bootstrap';
 // import { getCookie } from "../shared/Cookie";
-import { useNavigate, Routes, Route } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { getCookie } from '../shared/cookie';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import {
+  getCookieToken,
+  getUserData,
+  removeCookieToken,
+  removeUserData,
+} from '../shared/cookie';
 import styled from 'styled-components';
 import nikelogo from '../image/nikelogo.png';
 
-const Banner = (props) => {
+const Banner = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const is_login = getCookie('is_login');
-  const user_info = useSelector((state) => state.user);
-  // console.log(user_info);
 
-  if (
-    //로그인, 회원가입 화면에서는 헤더를 보여주지 않음.
-    window.location.pathname === './login' ||
-    window.location.pathname === './signup'
-  )
-    return null;
+  const cookie = getCookieToken();
+  const token = localStorage.getItem('login-token');
+
+  const username = getUserData();
+
+  const logout = () => {
+    removeCookieToken();
+    removeUserData();
+    window.location.href = '/';
+  };
 
   return (
     <Header>
@@ -27,34 +33,55 @@ const Banner = (props) => {
           navigate('/');
         }}
       />
-      <HeaderText
-        onClick={() => {
-          navigate('/mypage');
-        }}
-      >
-        사용자님
-      </HeaderText>
-      <HeaderText
-        onClick={() => {
-          navigate('/product');
-        }}
-      >
-        상품등록
-      </HeaderText>
-      <HeaderText
-        onClick={() => {
-          navigate('/login');
-        }}
-      >
-        로그인
-      </HeaderText>
-      <HeaderText
-        onClick={() => {
-          navigate('/signup');
-        }}
-      >
-        회원가입
-      </HeaderText>
+      {cookie ? (
+        <>
+          <HeaderText
+            onClick={() => {
+              navigate('/mypage');
+            }}
+          >
+            {username}
+          </HeaderText>
+          <HeaderText
+            onClick={() => {
+              navigate('/product');
+            }}
+          >
+            상품등록
+          </HeaderText>
+          <HeaderText
+            onClick={() => {
+              logout();
+            }}
+          >
+            로그아웃
+          </HeaderText>
+        </>
+      ) : (
+        <>
+          <HeaderText
+            onClick={() => {
+              navigate('/product');
+            }}
+          >
+            상품등록
+          </HeaderText>
+          <HeaderText
+            onClick={() => {
+              navigate('/login');
+            }}
+          >
+            로그인
+          </HeaderText>
+          <HeaderText
+            onClick={() => {
+              navigate('/signup');
+            }}
+          >
+            회원가입
+          </HeaderText>
+        </>
+      )}
     </Header>
   );
 };
