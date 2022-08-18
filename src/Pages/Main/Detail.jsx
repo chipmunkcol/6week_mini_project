@@ -55,7 +55,8 @@ useEffect(()=>{
 
     return(
         <div>
-        <div style={{width:'90%', height:'30px', margin:'0 auto 0 auto',backgroundColor:'#ded8c8'}}>
+          <Banner />
+        <div style={{width:'1000px', height:'30px', margin:'0 auto 0 auto',backgroundColor:'#ded8c8'}}>
             <FontAwesomeIcon icon={faTrashCan} type='button' size="lg" style={{float:'right', margin:'5px 21px 0 0', color:'crimson'}} onClick={()=>{
                 if(window.confirm("정말 삭제하나요?")) {
                     console.log(params)
@@ -65,7 +66,7 @@ useEffect(()=>{
                 }
             }}/>
         </div>
-        <div style={{border:'1px solid #ced4da', width:'90%', margin:'0 auto 0 auto', padding:'30px'}}>
+        <div style={{border:'1px solid #ced4da', width:'1000px', height:'750px', margin:'0 auto 0 auto', padding:'30px'}}>
             <div style={{display:'flex', flexDirection:'row'}}>
                 
                 <Flex1>
@@ -87,6 +88,7 @@ useEffect(()=>{
 
             </div>
            
+          <div style={{ border:'1px solid #ced4da', width:'75%', height:'370px', display:'flex', margin:'20px auto 0 auto'  }}>
            <ReplyContainer>
 
                 <div style={{height:'80%', overflow: 'auto'}}>
@@ -128,7 +130,8 @@ useEffect(()=>{
                 </InputGroup>
 
             </ReplyContainer>
-        </div>
+            </div>
+          </div>
         </div>
     );
 }
@@ -139,9 +142,10 @@ const ReplyContainer = styled.div`
     flex-direction: column;
     border: 1px solid #ced4da;
     border-radius: 4px;
-    width: 75%;
-    margin: 30px auto 0 auto;
-    height: 300px;
+    width: 98%;
+    height: 96%;
+    margin: auto;
+    background-color: snow;
 `
 
 

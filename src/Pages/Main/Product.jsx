@@ -68,36 +68,7 @@ const Product = () => {
       dispatch(__postProduct(product))
   }
 
-  // const postProduct2 = async() => {
-
-  //   const product = {
-  //     postRequestDto:
-  //         {
-  //             title: title,
-  //             size: size,
-  //             price: price,
-  //             describe: describe
-  //         },
-  //     multipartFile: urlFile
-  //   }
-
-  //   const token = getCookie("is_login")
-  //   console.log(token)
-  //   axios({
-  //     method: "post",
-  //     url: "http://54.180.122.99/api/product",
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   })
-  //     .then((res) => { 
-  //       console.log(res)
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.code, error.message);
-  //     });
-  // };
-
+ 
   return (
     <ProductContainer>
       <Banner />
