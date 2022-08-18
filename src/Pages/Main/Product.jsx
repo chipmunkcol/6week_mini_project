@@ -14,7 +14,6 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../shared/firebase';
 import { initializeApp } from 'firebase/app';
 import { getStorage } from 'firebase/storage';
-import { useForm } from 'react-hook-form';
 
 const Product = () => {
   // const [urlFile, setUrlFile] = useState('')
@@ -24,14 +23,21 @@ const Product = () => {
   const [price, setPrice] = useState();
   const [describe, setDescribe] = useState();
 
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // const handleChangeFile = (e) => {
+
+  //     let reader = new FileReader();
+
+  //     if (e.target.files[0]) {
+  //         reader.readAsDataURL(e.target.files[0])
+  //     }
+  //     reader.onload = () => {
+  //         const fileUrl = reader.result;
+  //         setUrlFile(fileUrl)
+  //     }
+  // }
 
   const uploadFB = async (e) => {
     console.log(e.target.files);
@@ -54,8 +60,9 @@ const Product = () => {
       content: describe,
       imgUrl: fileUrl,
     };
-    dispatch(__postProduct(product));
+
     console.log(product);
+    dispatch(__postProduct(product));
   };
 
   return (
@@ -96,11 +103,6 @@ const Product = () => {
             <AddINput
               type="text"
               placeholder="가격"
-              onKeyDown={(e) => {
-                if (!/^[0-9]+$/.test(e.key) && e.key.length === 1) {
-                  alert('숫자로 입력해주십시오.');
-                }
-              }}
               padding={'120px'}
               onChange={(e) => {
                 setPrice(e.target.value);
@@ -122,11 +124,6 @@ const Product = () => {
               <SizeInput
                 type="text"
                 placeholder="사이즈"
-                onKeyDown={(e) => {
-                  if (!/^[0-9]+$/.test(e.key) && e.key.length === 1) {
-                    alert('숫자로 입력해주십시오.');
-                  }
-                }}
                 onChange={(e) => {
                   setSize(e.target.value);
                 }}
@@ -167,18 +164,18 @@ const ProductTitle = styled.div`
 `;
 
 const ProductBox = styled.div`
-  width: 1600px;
+  width: 1300px;
   height: 600px;
   margin: 30px auto;
 `;
 
 const Appstyle = styled.div`
-  width: 1100px;
+  width: 800px;
   height: 600px;
   background: black;
   float: left;
   img {
-    width: 1100px;
+    width: 800px;
     height: 600px;
   }
   label {
@@ -203,7 +200,7 @@ const Overlay = styled.div`
   position: absolute;
   background: rgba(0, 0, 0, 0.5);
   opacity: 0;
-  transition: all 3s;
+  transition: all 2s;
   :hover {
     opacity: 1;
   }
