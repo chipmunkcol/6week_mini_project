@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import { configureStore } from '@reduxjs/toolkit';
 import { productSlice, productsSlice } from '../modules/product';
 import { commentSlice } from '../modules/comment';
+import { likeSlice } from '../modules/like';
 import { signupSlice, idcheckSlice, nicknameSlice } from '../modules/signup';
 import { usersSlice } from '../modules/login';
 
@@ -12,6 +13,7 @@ export const store = configureStore(
       products: productsSlice.reducer,
       product: productSlice.reducer,
       comments: commentSlice.reducer,
+      likes: likeSlice.reducer,
       signup: signupSlice.reducer,
       idcheck: idcheckSlice.reducer,
       nicknamecheck: nicknameSlice.reducer,

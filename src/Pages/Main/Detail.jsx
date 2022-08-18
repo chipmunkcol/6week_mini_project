@@ -3,10 +3,11 @@ import Banner from '../../Component/Banner';
 import { getCookie } from '../../shared/cookie';
 
 // import { RESP } from "../../response";
+import HeartImg from '../../image/love.png'
 import styled from "styled-components";
 import { Button, InputGroup, Form } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import { faTrashCan, faHeart } from '@fortawesome/free-solid-svg-icons'
 
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect, } from "react";
@@ -14,6 +15,8 @@ import { useSelector, useDispatch } from "react-redux";
 // import axios from "axios";
 import { __getProduct, __postProduct, __deleteProduct } from '../../redux/modules/product';
 import { __getComment, __postComment, __deleteComment } from '../../redux/modules/comment'
+import { __postLike } from '../../redux/modules/like'
+
 
 function Detail() {
 
@@ -45,13 +48,13 @@ useEffect(()=>{
 
 
 
-    if (product.length === 0) {
-        return <h1 style={{backgroundColor:'yellow', height:'500px', display:'fles', justifyContent:'center',alignItems:'center'}}>로딩중입니다...</h1>
-    }
+if (product.length === 0) {
+    return <h1 style={{backgroundColor:'yellow', height:'500px', display:'fles', justifyContent:'center',alignItems:'center'}}>로딩중입니다...</h1>
+}
 
-    // if (error || error2) {
-    //     return <h1>{error.message}</h1>
-    // }
+// if (error || error2) {
+//     return <h1>{error.message}</h1>
+// }
 
     return(
         <div>
@@ -80,8 +83,18 @@ useEffect(()=>{
                     <div style={{display:'flex', margin:'10px 10px 16px 10px'}}><span style={{width:'40%'}}>Product Info</span> <span style={{fontSize:'small', color:'#b2b2b2'}}>제품정보</span></div>
                     <div style={{display:'flex', margin:'10px'}}><Title>Title</Title> <Desc>{product.title}</Desc></div>
                     <div style={{display:'flex', margin:'10px'}}><Title>Size</Title> <Desc>{product.size}</Desc></div>
-                    <div style={{display:'flex', margin:'10px'}}><Title>Like</Title> <Desc>❤ +{product.likesCnt}</Desc></div>
+                    
                     <div style={{display:'flex', margin:'10px'}}><Title>Price</Title> <Desc>{product.price}</Desc></div>
+                    <div style={{display:'flex', margin:'10px'}}><Title>Like</Title> <Desc type='button' onClick={()=>{ 
+                        dispatch(__postLike(params))
+                        
+                        setTimeout(() => {
+                          setReLoading(!reLoading)
+                        }, 500); 
+                      }}> 
+                          <img src={HeartImg} style={{width:'10%'}} />
+                          <span> + {product.likesCnt}</span></Desc>
+                    </div>
                     <div style={{display:'flex', margin:'10px', height:'100px', overflow:'auto'}}><Title>Desc</Title> <Desc>{product.content}</Desc></div>
                     
                 </Flex2>

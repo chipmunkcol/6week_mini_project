@@ -37,7 +37,7 @@ const Banner = () => {
         <>
           <HeaderText
             onClick={() => {
-              navigate('/mypage');
+              navigate('/mypage/likes');
             }}
           >
             {username}
